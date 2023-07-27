@@ -64,7 +64,13 @@ def binOP (r, sigma, initial_S, T, K, put_or_call, optionType, M, gamma_par = 1)
 
     else:
         raise ValueError ("optionType has to be European ('E') or American ('A')")
+    # greek estimations (pretty rough) 
+    delta = (V[1][1]- V[1][0]) / (S[1][1] -S[1][0])
+    # Para gamma quiero mirarme primero mejor como se hace el tema de finite differences con segundas derivadas. Tenemos calculadas dos por lo menos  
+    theta = (V[2][1] - V[0][0]) / (2*delta_t)
 
+
+    return V[0][0]
     return V[0][0]
 # r, sigma, S, T, K, put_or_call, optionType, M
 print (binOP(0.1, 0.4, 50, 5/12, 50, 'P', 'A', 32))
