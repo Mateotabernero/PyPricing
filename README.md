@@ -1,4 +1,2 @@
 # PyPricingPro
-A library for option pricing in python 
-
-$$ 2^x$$
+PyPricingPro is an Option Pricing library written in Python 
