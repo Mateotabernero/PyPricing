@@ -1,5 +1,12 @@
 # PyPricingPro
-PyPricingPro is an Option Pricing library written in Python 
+PyPricingPro is an Option Pricing library written in Python. The library includes:
+
+-  Pricing of European and American Option and computation of greeks: Binomial, MonteCarlo and Black-Scholes
+-  Stock price models: GBM, Heston, Jump Diffusion 
+-  Pricing of exotic options (Asian, )
+-  Advanced techniques: FFT, COS transforms
+
+
 
 I intend to have four separate files for different types of functions. The files will be:
 -  One file for common, simple functions like the payOff function or estimating the volatility for a given stock that may be used in the other three files
