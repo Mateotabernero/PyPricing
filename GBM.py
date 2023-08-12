@@ -72,6 +72,17 @@ def eu_GBM(r, sigma, S_0, K, num_steps, T, put_or_call, num_simulations = 10000,
     V = math.exp(-r*T)*np.mean(Vs) 
     return V 
 
+def as_GBM(r, sigma, S_0, K, num_steps, T, put_or_call, num_simulations = 10000, integration_method = 'E', ant_variates = False, payOff = helpFunctions.asianPayOff):
+    S = GBM(r, sigma, S_0, num_steps, T, num_simulations = num_simulations, integration_method = 'E', ant_variates = False)
+    # Hay que definir mejor la media porque seguro que hay una forma mucho mejor 
+    price_mean = np.zeros(num_simulations)
+    for i in range(num_simulations):
+        price_mean[i] = np.mean(S[i,:]) 
+    Vs = np.vectorize(payOff)(S[:, num_steps], K, price_mean, put_or_call)
+    # Y supongo que luego hay que hacer lo mismo que con las europeas pero debería comprobarlo
+    V = math.exp(-r*T)*np.mean(Vs) 
+    return V 
+
 #Habría que añadir más payoffs. El vanilla es el más normal pero tampoco cuesta mucho. Es cambiar la fórmula payOff añadiendo un nuevo parámetro que sea predefinido como 'Vanilla'
 # Adaptarlo para up-and-out barriers requiere modificar un poco así que se puede hacer una función diferente. SI el precio sube por encima de la barrera hay que dejar claro que la opción no se ejecuta y el payoff será cero  
 # Definir otra función que sea up_out_eu_GBM y luego poner un if que si el payoff es ese se llame a esa función
