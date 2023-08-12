@@ -71,6 +71,4 @@ def binOP (r, sigma, initial_S, T, K, put_or_call, optionType, M, gamma_par = 1)
 
 
     return V[0][0]
-    return V[0][0]
-# r, sigma, S, T, K, put_or_call, optionType, M
-print (binOP(0.1, 0.4, 50, 5/12, 50, 'P', 'A', 32))
+    
