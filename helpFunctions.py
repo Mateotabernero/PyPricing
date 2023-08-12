@@ -42,7 +42,8 @@ def mu_sigma(prices):
     """
     Calculate the log returns from a series of prices and then compute the mean (as an approximation of the drift) and the std (as an approximation of the volatility) 
 
-    : param prices       : An array with the prices of 
+    : param prices       : An array with the prices of the daily prices of a stock 
+    : return             : A pair containing the mean of the log returns and the standard deviation 
     """
   log_returns = np.zeros(len(log_prices)-1)
   for i in range(len(log_returns)):
