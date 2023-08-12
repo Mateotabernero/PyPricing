@@ -1,12 +1,34 @@
-#Esto funciona con el ejemplo 1.6 del libro 
-
 import math
+
+### We first include some functions to compute some useful magnitudes on Binomial Option pricing 
+
 def calc_beta (r, sigma, delta_t, gamma_par = 1): 
+    """
+    Calculate beta in Binomial Option Pricing 
+    : param r            : Risk-free interest rate
+    : param sigma        : Volatility of the stock price
+    : param delta_t      : Time increments in the Binomial Option Pricing tree 
+    : oaram gamma_par    : The gamma parameter in BOP (default value: 1) 
+    : return             : beta 
+    """
     return 1/2 *(gamma_par *math.exp(-r*delta_t) + math.exp((r+sigma**2)*delta_t))
 
 def calc_u(beta, gamma_par = 1): 
+    """
+    Calculate u in Binomial Option Pricing
+    : param beta         : beta 
+    : param gamma_par    : The gamma parameter in BOP (default value: 1) 
+    : return             : u, the factor by which S moves up in Binomial Option Pricing
+    """
     return (beta + math.sqrt(beta**2 - gamma_par)) 
+    
 def calc_d(beta, gamma_par= 1):
+    """
+    Calculate d in Binomial Option Pricing
+    : param beta         : beta 
+    : param gamma_par    : The gamma parameter in BOP (default value: 1) 
+    : return             : d, the factor by which S moves down in BOP 
+    """
     return (beta - math.sqrt(beta**2 - gamma_par))
 
 def calc_p(r, delta_t, u, d):
