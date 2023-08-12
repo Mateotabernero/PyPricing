@@ -19,6 +19,8 @@ def payOff (S,K, put_or_call):
         return max(S-K,0) 
     elif (put_or_call == 'P'):
         return max (K-S, 0) 
+    else: 
+        raise ValueError ("Please choose a valid value for put_or_call: Put ('P') or Call ('C')") 
 # Hay muchas formas de implementar esto realmente, podría en la función principal calcular la media y según put_or_call poner K = S o S = mean y luego usar payOff. Pero bueno, está bien 
 def asianPayOff(S,K, mean, put_or_call):
   if (put_or_call == 'PC'):
@@ -29,4 +31,6 @@ def asianPayOff(S,K, mean, put_or_call):
     return max(S-mean, 0)
   if (put_or_call == 'SP'):
     return max(mean-S, 0)
+  else: 
+    raise ValueError ("Please choose a valid value for put_or_call: Price Call ('PC')', Price Put ('PP'), Strike Call ('SC') or Strike Put ('SP')")
 
