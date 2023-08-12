@@ -2,7 +2,9 @@
 
 
 
-# This function calculates the log returns from a series of prices and thus compute the mean (as an approximation of mu) and the std (as an approximation of sigma)
+
+
+# This function calculates the log returns from a series of prices and then compute the mean (as an approximation of mu) and the std (as an approximation of sigma)
 def mu_sigma(prices):
   log_returns = np.zeros(len(log_prices)-1)
   for i in range(len(log_returns)):
