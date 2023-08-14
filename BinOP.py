@@ -1,6 +1,6 @@
 import math
 
-### We first include some functions to compute some useful magnitudes on Binomial Option pricing 
+### We first include some functions to compute some useful magnitudes on Binomial Option pricing (all to be explained in the Readme file) 
 
 def calc_beta (r, sigma, delta_t, gamma_par = 1): 
     """
@@ -32,18 +32,34 @@ def calc_d(beta, gamma_par= 1):
     return (beta - math.sqrt(beta**2 - gamma_par))
 
 def calc_p(r, delta_t, u, d):
+    """
+    Calculate p in Binomial Option Pricing 
+    : param r            : Risk-free interest rate 
+    : param delta_t      : Time increments 
+    : param u            : u, the factor by which S moves up in BOP 
+    : param d            : d, the factor by which S moves down in BOP
+    : return             : p, the probability of S moving up 
+    """
     return (math.exp (r*delta_t)-d) / (u-d) 
 
-# We need to put something if put_or_call is not P or C
-def payOff (S,K, put_or_call, bound = 0): 
-    if (put_or_call == 'C'): 
-        return max(S-K,bound) 
-    elif (put_or_call == 'P'):
-        return max (K-S, bound) 
 
-# To improve convergence choose gamma = e^((2/M)*log(K/S_0))
+# To improve convergence choose gamma = e^((2/M)*log(K/S_0)) is a good choice
 
-def binOP (r, sigma, initial_S, T, K, put_or_call, optionType, M, gamma_par = 1): 
+def binOP (r, sigma, S, T, K, put_or_call, optionType, M, gamma_par = 1): 
+
+    """
+    Calculate the value of an American or European option using Binomial Method 
+    : param r            : Risk-free interest rate 
+    : param sigma        : Volatility 
+    : param S            : Price of the underlying stock 
+    : param T            : Expiration time 
+    : K                  : Strike price
+    : param put_or_call  : Put ('P') or Call ('C') 
+    : param optionType   : Is it an European ('E') or American ('A') option? 
+    : param M            : Number of steps in the binomial tree 
+    : param gamma_par    : Gamma parameter in binomial option pricing (default value: 1) 
+    : return            : Value of the option 
+    """
     # Compute delta_t 
     delta_t = T / M 
     
@@ -53,7 +69,7 @@ def binOP (r, sigma, initial_S, T, K, put_or_call, optionType, M, gamma_par = 1)
     p = calc_p (r, delta_t, u, d)
 
     # Creation of the tree of stock prices and the tree of option value (We don't really need to create the price tree, we just need the last one. the second s array is that case) (For american ption is necessary)
-    # No ahorraríamos mucho si metemos lo de S dentro de los if, porque ya estamos haciendo O(M^2) work anyways 
+
     S= [[0 for _ in range (i+1)] for i in range (M+1)] 
     V = [[0 for _ in range (i+1)] for i in range (M+1)]
     V_cont = [[0 for _ in range(i+1)] for i in range(M+1)]
@@ -86,11 +102,10 @@ def binOP (r, sigma, initial_S, T, K, put_or_call, optionType, M, gamma_par = 1)
 
     else:
         raise ValueError ("optionType has to be European ('E') or American ('A')")
-    # greek estimations (pretty rough) 
+    
+    # Computing greeks:  
     delta = (V[1][1]- V[1][0]) / (S[1][1] -S[1][0])
-    # Para gamma quiero mirarme primero mejor como se hace el tema de finite differences con segundas derivadas. Tenemos calculadas dos por lo menos  
     theta = (V[2][1] - V[0][0]) / (2*delta_t)
-
-
+    # (Include gamma and other greeks) 
     return V[0][0]
     
