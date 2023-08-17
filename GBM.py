@@ -19,7 +19,10 @@ def GBM(r, sigma, S_0, num_steps, T, num_simulations = 10000, integration_method
 
     for i in range(num_simulations):
         S[i,0] = S_0 
-    
+
+    if ant_variates: 
+        for i in range(num_simulations): 
+            ant_S[i,0] = S_0 
     for i in range(num_simulations):
         for j in range(num_steps): 
             # This values are common to the three methods of integration 
