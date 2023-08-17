@@ -14,15 +14,13 @@ def GBM(r, sigma, S_0, num_steps, T, num_simulations = 10000, integration_method
     S = np.zeros((num_simulations, num_steps +1))
     W = np.random.normal(0,1,(num_simulations, num_steps)) 
 
-    if ant_variates: 
-        ant_S = S 
 
     for i in range(num_simulations):
         S[i,0] = S_0 
-
+    
     if ant_variates: 
-        for i in range(num_simulations): 
-            ant_S[i,0] = S_0 
+        ant_S = S 
+   
     for i in range(num_simulations):
         for j in range(num_steps): 
             # This values are common to the three methods of integration 
