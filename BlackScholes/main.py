@@ -1,3 +1,9 @@
+import numpy as np 
+import math 
+import scipy.stats as stats
+from BlackScholes import * 
+
+
 class BlackScholesOption:
     def  __init__ (self, spot_price, strike_price, maturity, call_or_put, risk_free_rate, volatility, div= 0):
         self.S     = spot_price
