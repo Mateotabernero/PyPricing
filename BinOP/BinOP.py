@@ -77,7 +77,7 @@ def binOP (r, sigma, S, T, K, put_or_call, optionType, M, gamma_par = 1):
     
     # Boundary values
 
-    S[0][0] = initial_S 
+    S[0][0] = S_0
     for j in range (M+1): 
         S[M][j] = S[0][0] * (u**j) * (d** (M-j)) 
         
@@ -88,7 +88,7 @@ def binOP (r, sigma, S, T, K, put_or_call, optionType, M, gamma_par = 1):
 
     if optionType == 'E':
         for i in reversed(range (M)):
-            for j in range(i):
+            for j in range(i+1):
                 V[i][j] = math.exp(-r*delta_t)*(p*V[i+1][j+1] + (1-p)*V[i+1][j])
 
     
@@ -109,7 +109,7 @@ def binOP (r, sigma, S, T, K, put_or_call, optionType, M, gamma_par = 1):
     # (Include gamma and other greeks) 
     return V[0][0]
 
-def generate_tree(r, sigma, S, T, K, put_or_call, optionType, M, gamma_par = 1): 
+def generate_tree(r, sigma, S_0, T, K, put_or_call, optionType, M, gamma_par = 1): 
     """
     Calculate the Binomial Tree for American or European option 
     : param r            : Risk-free interest rate 
@@ -140,7 +140,7 @@ def generate_tree(r, sigma, S, T, K, put_or_call, optionType, M, gamma_par = 1):
     
     # Boundary values
 
-    S[0][0] = initial_S 
+    S[0][0] = S_0
     for j in range (M+1): 
         S[M][j] = S[0][0] * (u**j) * (d** (M-j)) 
         
@@ -151,7 +151,7 @@ def generate_tree(r, sigma, S, T, K, put_or_call, optionType, M, gamma_par = 1):
 
     if optionType == 'E':
         for i in reversed(range (M)):
-            for j in range(i):
+            for j in range(i+1):
                 V[i][j] = math.exp(-r*delta_t)*(p*V[i+1][j+1] + (1-p)*V[i+1][j])
 
     
