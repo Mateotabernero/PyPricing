@@ -109,7 +109,7 @@ def binOP (r, sigma, S, T, K, put_or_call, optionType, M, gamma_par = 1):
     # (Include gamma and other greeks) 
     return V[0][0]
 
-def generate_tree(r, sigma, S, T, K, put_or_call, optionType, M, gamma_par = 1)
+def generate_tree(r, sigma, S, T, K, put_or_call, optionType, M, gamma_par = 1): 
     """
     Calculate the Binomial Tree for American or European option 
     : param r            : Risk-free interest rate 
