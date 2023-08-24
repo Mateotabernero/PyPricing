@@ -89,6 +89,8 @@ def binOP (r, sigma, S, T, K, put_or_call, optionType, M, gamma_par = 1):
     if optionType == 'E':
         for i in reversed(range (M)):
             for j in range(i+1):
+                S[i][j] = S[0][0] * (u**j) * (d** (i-j))
+                
                 V[i][j] = math.exp(-r*delta_t)*(p*V[i+1][j+1] + (1-p)*V[i+1][j])
 
     
