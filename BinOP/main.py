@@ -36,5 +36,9 @@ class BinOption:
 
         return (new_values[0][0] - self.values[0][0])/(new_sigma - self.sigma) 
      
-    
+    def rho(self): 
+        new_r = 1.01*self.r
+        new_values, new_prices = BinOp.generate_tree(new_r, self.sigma, self.S, self.T, self.K, self.CoP, self.OT, self.M, gamma_par = self.gamma_par) 
+
+        return (new_values[0][0] - self.values[0][0])/(new_r - r) 
      
