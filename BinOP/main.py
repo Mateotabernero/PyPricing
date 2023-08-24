@@ -24,6 +24,6 @@ class BinOption:
         return (self.values[1][1] - self.values[1][0])/(self.prices[1][1] - self.prices[1][0])
     
     def theta(self): 
-        return (self.values[2][1] - self.values[0][0]) / (2*(self.T/self.M))
+        return -(self.values[2][1] - self.values[0][0]) / (2*(self.T/self.M))
     
      
