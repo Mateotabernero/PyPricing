@@ -19,11 +19,22 @@ class BinOption:
 
     def value(self): 
         return self.values[0][0]
+
+
+
+    # Functiona bastante mejor de lo esperado
     
     def delta(self): 
         return (self.values[1][1] - self.values[1][0])/(self.prices[1][1] - self.prices[1][0])
     
     def theta(self): 
         return -(self.values[2][1] - self.values[0][0]) / (2*(self.T/self.M))
+    
+    def vega(self):
+        new_sigma = 1.01*self.sigma
+        new_values, new_prices = BinOP.generate_tree(self.r, new_sigma, self.S, self.T, self.K, self.CoP, self.OT, self.M, gamma_par = self.gamma_par)
+
+        return (new_values[0][0] - self.values[0][0])/(new_sigma - self.sigma) 
+     
     
      
