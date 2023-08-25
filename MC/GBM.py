@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 import math 
 import helpFunctions
 
-# This functions uses GBM to simulate stock-price path
-# Availability to choose between different SDEs integration methods, to use or not antithetic variates
+# Space inefficient, but allows for an easier treatment of more general (path-dependent) payoffs 
+
 def GBM(r, sigma, S_0, num_steps, T, num_simulations = 10000, integration_method = 'E', ant_variates = False):
     delta_t = T/num_steps 
 
