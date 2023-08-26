@@ -11,9 +11,8 @@ def delta(K, S, r, T, sigma, call_or_put, div = 0):
     : param K      : Strike price of the option 
     : S            : Price of the underlying stock 
     : r            : Risk-free interest rate 
-    : T            : Expiration time
+    : T            : Time for maturity
     : sigma        : Volatility
-    : t            : Time 
     : call_or_put  : Type of option: Call ('C') or Put ('P') 
     : div          : Dividends 
     : returns      : delta of the option 
@@ -32,9 +31,8 @@ def vega(K, S, r, T, sigma, call_or_put, div = 0):
     : param K      : Strike price of the option 
     : S            : Price of the underlying stock 
     : r            : Risk-free interest rate 
-    : T            : Expiration time
+    : T            : Time for maturity
     : sigma        : Volatility
-    : t            : Time 
     : call_or_put  : Type of option: Call ('C') or Put ('P') 
     : div          : Dividends 
     : returns      : vega of the option 
@@ -51,9 +49,8 @@ def theta(K, S, r, T, sigma, call_or_put, div = 0):
     : param K      : Strike price of the option 
     : S            : Price of the underlying stock 
     : r            : Risk-free interest rate 
-    : T            : Expiration time  
-    : sigma        : Volatility
-    : t            : Time 
+    : T            : Time for maturity  
+    : sigma        : Volatility 
     : call_or_put  : Type of option: Call ('C') or Put ('P') 
     : div       : Dividends 
     : returns      : theta of the option 
@@ -78,9 +75,8 @@ def gamma(K, S, r, T, sigma, call_or_put, div = 0):
     : param K      : Strike price of the option 
     : S            : Price of the underlying stock 
     : r            : Risk-free interest rate 
-    : T            : Expiration time  
+    : T            : Time for maturity  
     : sigma        : Volatility
-    : t            : Time 
     : call_or_put  : Type of option: Call ('C') or Put ('P') 
     : div          : Dividends 
     : returns      : gamma of the option 
@@ -95,9 +91,8 @@ def rho(K, S, r, T, sigma, call_or_put, div = 0):
     : param K      : Strike price of the option 
     : S            : Price of the underlying stock 
     : r            : Risk-free interest rate 
-    : T            : Expiration time  
+    : T            : Time for maturity  
     : sigma        : Volatility
-    : t            : Time 
     : call_or_put  : Type of option: Call ('C') or Put ('P') 
     : div          : Dividends 
     : returns      : rho of the option 
