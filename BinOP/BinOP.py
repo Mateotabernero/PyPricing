@@ -1,7 +1,22 @@
 import math
 
 ### We first include some functions to compute some useful magnitudes on Binomial Option pricing (all to be explained in the Readme file) 
+def payOff (S,K, put_or_call):
+    """
+    Calculate the payoff of an American or European option at some moment
 
+    : param S            : Current price of the underlying stock
+    : param K            : Exercise price 
+    : param put_or_call  : Is the option a put ('P') or a call ('C')?
+    : return             : payoff of the option 
+    """
+    if (put_or_call == 'C'): 
+        return max(S-K,0) 
+    elif (put_or_call == 'P'):
+        return max (K-S, 0) 
+    else: 
+        raise ValueError ("Please choose a valid value for put_or_call: Put ('P') or Call ('C')") 
+        
 def calc_beta (r, sigma, delta_t, gamma_par = 1): 
     """
     Calculate beta in Binomial Option Pricing 
