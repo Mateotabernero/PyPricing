@@ -11,9 +11,9 @@ def payOff (S,K, put_or_call):
     : return             : payoff of the option 
     """
     if (put_or_call == 'C'): 
-        return max(S-K,0) 
+        return np.maximum(S-K,0) 
     elif (put_or_call == 'P'):
-        return max (K-S, 0) 
+        return np.maximum(K-S, 0) 
     else: 
         raise ValueError ("Please choose a valid value for put_or_call: Put ('P') or Call ('C')") 
         
