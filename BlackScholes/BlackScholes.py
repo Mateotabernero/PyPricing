@@ -36,7 +36,7 @@ def calc_d_2(K, S, r, T, sigma,  div = 0):
 
 def delta(K, S, r, T, sigma, call_or_put, div = 0):
     """
-    Calculate the delta of an european option (Black-Scholes model) 
+    Calculate the delta of an European option (Black-Scholes model) 
 
     : param K           : Strike price of the option 
     : param S           : Spot price of the underlying stock 
@@ -45,7 +45,7 @@ def delta(K, S, r, T, sigma, call_or_put, div = 0):
     : param sigma       : Volatility 
     : param call_or_put : Type of option: Call ('C') or Put ('P')
     : param div         : Dividends 
-    : returns      : delta of the option 
+    : returns           : delta of the option 
     """
     d_1 = calc_d_1(K, S, r, T, sigma, div = div)
     if (call_or_put == 'C'):
@@ -56,7 +56,7 @@ def delta(K, S, r, T, sigma, call_or_put, div = 0):
 
 def vega(K, S, r, T, sigma, call_or_put, div = 0):
     """
-    Calculate the vega of an european option (Black-Scholes model) 
+    Calculate the vega of an European option (Black-Scholes model) 
 
     : param K           : Strike price of the option 
     : param S           : Spot price of the underlying stock 
@@ -65,7 +65,7 @@ def vega(K, S, r, T, sigma, call_or_put, div = 0):
     : param sigma       : Volatility 
     : param call_or_put : Type of option: Call ('C') or Put ('P')
     : param div         : Dividends 
-    : returns      : vega of the option 
+    : returns           : vega of the option 
     """
     d_1 = calc_d_1(K, S, r, T, sigma,  div = div)
 
@@ -74,7 +74,7 @@ def vega(K, S, r, T, sigma, call_or_put, div = 0):
 
 def theta(K, S, r, T, sigma, call_or_put, div = 0):
     """
-    Calculate the theta of an european option (Black-Scholes model) 
+    Calculate the theta of a european option (Black-Scholes model) 
     
     : param K           : Strike price of the option 
     : param S           : Spot price of the underlying stock 
@@ -83,7 +83,7 @@ def theta(K, S, r, T, sigma, call_or_put, div = 0):
     : param sigma       : Volatility 
     : param call_or_put : Type of option: Call ('C') or Put ('P')
     : param div         : Dividends 
-    : returns      : theta of the option 
+    : returns           : theta of the option 
     """
     d_1 = calc_d_1(K, S, r, T, sigma, div = div)
     d_2 = calc_d_2(K, S, r, T, sigma, div = div) 
@@ -100,7 +100,7 @@ def theta(K, S, r, T, sigma, call_or_put, div = 0):
 
 def gamma(K, S, r, T, sigma, call_or_put, div = 0):
     """
-    Calculate the gamma of an european option (Black-Scholes model) 
+    Calculate the gamma of an European option (Black-Scholes model) 
     
     : param K           : Strike price of the option 
     : param S           : Spot price of the underlying stock 
@@ -109,14 +109,14 @@ def gamma(K, S, r, T, sigma, call_or_put, div = 0):
     : param sigma       : Volatility 
     : param call_or_put : Type of option: Call ('C') or Put ('P')
     : param div         : Dividends 
-    : returns      : gamma of the option 
+    : returns           : gamma of the option 
     """
     d_1 = calc_d_1(K, S, r, T, sigma, div = div) 
     return stats.norm.pdf(d_1)/(S*sigma*math.sqrt(T)) 
 
 def rho(K, S, r, T, sigma, call_or_put, div = 0): 
     """
-    Calculate the rho of an european option (Black-Scholes model) 
+    Calculate the rho of an European option (Black-Scholes model) 
     
     : param K           : Strike price of the option 
     : param S           : Spot price of the underlying stock 
@@ -125,7 +125,7 @@ def rho(K, S, r, T, sigma, call_or_put, div = 0):
     : param sigma       : Volatility 
     : param call_or_put : Type of option: Call ('C') or Put ('P')
     : param div         : Dividends 
-    : returns      : rho of the option 
+    : returns           :  rho of the option 
     """
     d_2 = calc_d_2(K, S, r, T, sigma, div = div) 
     if (call_or_put == 'C'): 
@@ -138,6 +138,18 @@ def rho(K, S, r, T, sigma, call_or_put, div = 0):
 
 
 def BSprice (K,S,r, T, sigma, call_or_put, div = 0):
+    """
+    Calculate the value of an European option (Black-Scholes model) 
+
+    : param K           : Strike price of the option 
+    : param S           : Spot price of the underlying stock 
+    : param r           : Risk-free interest rate 
+    : param T           : Time for maturity  
+    : param sigma       : Volatility 
+    : param call_or_put : Type of option: Call ('C') or Put ('P')
+    : param div         : Dividends 
+    : returns           : Option value
+    """
     d_1 = calc_d_1(K, S, r, T, sigma,  div = div) 
     d_2 = calc_d_2(K, S, r, T, sigma,  div = div) 
     if (call_or_put == 'C'):
