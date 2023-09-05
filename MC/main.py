@@ -1,3 +1,5 @@
+import GBM 
+import heston 
 
 class MCGBMOption: 
     def __init__(self, spot_price, strike_price, maturity, option_type, call_or_put, risk_free_rate, volatility): 
@@ -49,6 +51,38 @@ class MCGBMOption:
         return (new_price - price)/(new_S - self.S) 
     
     def theta(self, num_steps, num_simulations = 10**4, integration_method = 'E', ant_variates = False): 
-
-        # Aquí hay varias formas de afrontarlo. Una es como las de arriba. Aunque puede ser más inteligente generar los caminos solamente una vez y coger los caminos salvo el ultimo punto como un valor para un T menor 
+        # Still need to define the function 
+        pass 
         
+class MCHestonOption: 
+    def __init__(self, spot_price, strike_price, maturity, risk_free_rate, volatility_0, kappa, theta, xi): 
+        self.S     = spot_price
+        self.K     = strike_price 
+        self.T     = maturity 
+        self.r     = risk_free_rate
+        self.v_0    = volatility_0
+        self.kappa = kappa 
+        self.theta = theta 
+        self.xi    = xi 
+
+    def generate_paths(self, num_steps, num_simulations = 10**4, corr_index = 0): 
+        S, v = heston.heston(self.r, self.v_0, self.S, self.theta, self.xi, num_steps, corr_index = corr_index, num_simulations = num_simulations) 
+        return S, v
+
+    def price(self, num_steps, num_simulations = 10**4, corr_index = 0): 
+
+        S, v = self.generate_paths(num_steps, num_simulations = num_simulations, corr_index= corr_index)
+        
+        return np.exp(-self.r*self.T)*(np.mean(self.payOff(S)))
+    
+    def delta(self, num_steps, num_simulations = 10**4, corr_index = 0): 
+        new_S = self.S*1.01
+        
+        price = self.price(num_steps, num_simulations, corr_index) 
+
+        new_S, new_v = heston.heston(self.r, self.v_0, new_S, self.theta, self.xi, num_steps, corr_index, num_simulations) 
+        
+        new_price = np.exp(-self.r*self.T)*np.mean(self.payOff(new_S)) 
+
+        return (new_price - price)/(new_S - self.S) 
+    
