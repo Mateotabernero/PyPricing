@@ -28,9 +28,6 @@ class MCGBMOption:
         
         return np.exp(-self.r*self.T)*(np.mean(self.payOff(S))) 
 
-
-    # Luego añadimos lo de calcular greeks y tal aunque es un poco xd 
-
     def delta(self, num_steps, num_simulations = 10**4, integration_method = 'E', ant_variates = False):
         new_S = self.S*1.01
 
