@@ -24,7 +24,7 @@ class MCGBMOption:
         # Aquí creo que da un poco igual si cogemos self.generate_paths o la función original GBM.GBM. Si al ginal son iguales 
         # Esta igual mejor porque no hay que meter tantos argumentos (como r, sigma, o T) 
 
-        S =  self.generate_paths(num_steps, num_simulations = 10**4, integration_method = 'E', ant_variates = False)
+        S =  self.generate_paths(num_steps, num_simulations = num_simulations, integration_method = integration_method, ant_variates = ant_variates)
         
         return np.exp(-self.r*self.T)*(np.mean(self.payOff(S))) 
 
