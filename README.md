@@ -18,7 +18,7 @@ The helpFunction.py contains functions that are useful for the other files. Thos
 - asianPayOff    : Computes the payoff of an Asian option
 
 
-## BinOp folder
+## BinOP folder
 
 The BinOp folder contains code for Binomial model to price European and American Models
 
@@ -37,4 +37,6 @@ European and American options are defined as objects. From these objects we can 
 ### examples.ipynb 
 A jupyter notebook containing examples on using Binomial method to price several methods 
 
+## BlackScholes folder 
 
+The BlackScholes folder contains code for pricing European options under Black-Scholes model 
