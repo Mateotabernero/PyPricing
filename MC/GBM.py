@@ -1,6 +1,3 @@
-# Posibles problemas:
-# Las simulaciones de milstein parecen ser más altas. bueno creo que ha sido solo casualidad. He hecho 1000 simulaciones de euler y 1000 de milstein (mirar últimas líneas) y las medias en 250 eran 52.5038 (Euler), 52.4973 (Milstein) 
-# Otroas simulaciones dan  53.0484 (Euler), 52.0673 (Milstein), 52.5674 (Rudge-kutta) 
 import numpy as np 
 import matplotlib.pyplot as plt 
 import math 
