@@ -3,6 +3,18 @@ import math
 import scipy.stats as stats
 
 def calc_d_1(K, S, r, T, sigma, div = 0):
+    """
+    Calculate the value d1 in Black-Scholes model
+
+    : param K           : Strike price of the option 
+    : param S           : Spot price of the underlying stock 
+    : param r           : Risk-free interest rate 
+    : param T           : Time for maturity  
+    : param sigma       : Volatility 
+    : param call_or_put : Type of option: Call ('C') or Put ('P')
+    : param div         : Dividends 
+    : returns           : d1
+    """
     d_1 = (math.log(S/K) + (r-div+sigma**2/2)*(T))/(sigma*math.sqrt(T))
     return d_1
 def calc_d_2(K, S, r, T, sigma,  div = 0):
@@ -14,13 +26,13 @@ def delta(K, S, r, T, sigma, call_or_put, div = 0):
     """
     Calculate the delta of an european option (Black-Scholes model) 
 
-    : param K      : Strike price of the option 
-    : S            : Price of the underlying stock 
-    : r            : Risk-free interest rate 
-    : T            : Time for maturity
-    : sigma        : Volatility
-    : call_or_put  : Type of option: Call ('C') or Put ('P') 
-    : div          : Dividends 
+    : param K           : Strike price of the option 
+    : param S           : Spot price of the underlying stock 
+    : param r           : Risk-free interest rate 
+    : param T           : Time for maturity  
+    : param sigma       : Volatility 
+    : param call_or_put : Type of option: Call ('C') or Put ('P')
+    : param div         : Dividends 
     : returns      : delta of the option 
     """
     d_1 = calc_d_1(K, S, r, T, sigma, div = div)
@@ -34,13 +46,13 @@ def vega(K, S, r, T, sigma, call_or_put, div = 0):
     """
     Calculate the vega of an european option (Black-Scholes model) 
 
-    : param K      : Strike price of the option 
-    : S            : Price of the underlying stock 
-    : r            : Risk-free interest rate 
-    : T            : Time for maturity
-    : sigma        : Volatility
-    : call_or_put  : Type of option: Call ('C') or Put ('P') 
-    : div          : Dividends 
+    : param K           : Strike price of the option 
+    : param S           : Spot price of the underlying stock 
+    : param r           : Risk-free interest rate 
+    : param T           : Time for maturity  
+    : param sigma       : Volatility 
+    : param call_or_put : Type of option: Call ('C') or Put ('P')
+    : param div         : Dividends 
     : returns      : vega of the option 
     """
     d_1 = calc_d_1(K, S, r, T, sigma,  div = div)
@@ -52,13 +64,13 @@ def theta(K, S, r, T, sigma, call_or_put, div = 0):
     """
     Calculate the theta of an european option (Black-Scholes model) 
     
-    : param K      : Strike price of the option 
-    : S            : Price of the underlying stock 
-    : r            : Risk-free interest rate 
-    : T            : Time for maturity  
-    : sigma        : Volatility 
-    : call_or_put  : Type of option: Call ('C') or Put ('P') 
-    : div       : Dividends 
+    : param K           : Strike price of the option 
+    : param S           : Spot price of the underlying stock 
+    : param r           : Risk-free interest rate 
+    : param T           : Time for maturity  
+    : param sigma       : Volatility 
+    : param call_or_put : Type of option: Call ('C') or Put ('P')
+    : param div         : Dividends 
     : returns      : theta of the option 
     """
     d_1 = calc_d_1(K, S, r, T, sigma, div = div)
@@ -78,13 +90,13 @@ def gamma(K, S, r, T, sigma, call_or_put, div = 0):
     """
     Calculate the gamma of an european option (Black-Scholes model) 
     
-    : param K      : Strike price of the option 
-    : S            : Price of the underlying stock 
-    : r            : Risk-free interest rate 
-    : T            : Time for maturity  
-    : sigma        : Volatility
-    : call_or_put  : Type of option: Call ('C') or Put ('P') 
-    : div          : Dividends 
+    : param K           : Strike price of the option 
+    : param S           : Spot price of the underlying stock 
+    : param r           : Risk-free interest rate 
+    : param T           : Time for maturity  
+    : param sigma       : Volatility 
+    : param call_or_put : Type of option: Call ('C') or Put ('P')
+    : param div         : Dividends 
     : returns      : gamma of the option 
     """
     d_1 = calc_d_1(K, S, r, T, sigma, div = div) 
@@ -94,13 +106,13 @@ def rho(K, S, r, T, sigma, call_or_put, div = 0):
     """
     Calculate the rho of an european option (Black-Scholes model) 
     
-    : param K      : Strike price of the option 
-    : S            : Price of the underlying stock 
-    : r            : Risk-free interest rate 
-    : T            : Time for maturity  
-    : sigma        : Volatility
-    : call_or_put  : Type of option: Call ('C') or Put ('P') 
-    : div          : Dividends 
+    : param K           : Strike price of the option 
+    : param S           : Spot price of the underlying stock 
+    : param r           : Risk-free interest rate 
+    : param T           : Time for maturity  
+    : param sigma       : Volatility 
+    : param call_or_put : Type of option: Call ('C') or Put ('P')
+    : param div         : Dividends 
     : returns      : rho of the option 
     """
     d_2 = calc_d_2(K, S, r, T, sigma, div = div) 
@@ -111,13 +123,6 @@ def rho(K, S, r, T, sigma, call_or_put, div = 0):
     else: 
         #error message
         pass 
-    
-class EuropeanOption: 
-    def __init__(self, spot_price, strike_price, maturity, call_or_put): 
-        self.spot_price     = spot_price 
-        self.strike_price   = strike_price 
-        self.maturity       = maturity
-        self.call_or_put    = call_or_put
 
 
 def BSprice (K,S,r, T, sigma, call_or_put, div = 0):
