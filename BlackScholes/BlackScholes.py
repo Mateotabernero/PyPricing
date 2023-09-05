@@ -2,6 +2,12 @@ import numpy as np
 import math 
 import scipy.stats as stats
 
+def calc_d_1(K, S, r, T, sigma, div = 0):
+    d_1 = (math.log(S/K) + (r-div+sigma**2/2)*(T))/(sigma*math.sqrt(T))
+    return d_1
+def calc_d_2(K, S, r, T, sigma,  div = 0):
+    d_2 = (math.log(S/K) + (r-div-sigma**2/2)*(T))/(sigma*math.sqrt(T))
+    return d_2
 
 
 def delta(K, S, r, T, sigma, call_or_put, div = 0):
@@ -113,12 +119,6 @@ class EuropeanOption:
         self.maturity       = maturity
         self.call_or_put    = call_or_put
 
-def calc_d_1(K, S, r, T, sigma, div = 0):
-    d_1 = (math.log(S/K) + (r-div+sigma**2/2)*(T))/(sigma*math.sqrt(T))
-    return d_1
-def calc_d_2(K, S, r, T, sigma,  div = 0):
-    d_2 = (math.log(S/K) + (r-div-sigma**2/2)*(T))/(sigma*math.sqrt(T))
-    return d_2
 
 def BSprice (K,S,r, T, sigma, call_or_put, div = 0):
     d_1 = calc_d_1(K, S, r, T, sigma,  div = div) 
