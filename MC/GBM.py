@@ -61,7 +61,7 @@ def GBM(r, sigma, S_0, num_steps, T, num_simulations = 10000, integration_method
             raise ValueError("Please choose an appropiate SDE integration method (Euler ('E'), Milstein('M') or Rudge-Kutta('RK'))")
 
         if ant_variates: 
-            return (S, ant_S) 
+            return np.vstack((S, ant_S)) 
     return S
 
 
@@ -85,26 +85,3 @@ def as_GBM(r, sigma, S_0, K, num_steps, T, put_or_call, num_simulations = 10000,
     V = math.exp(-r*T)*np.mean(Vs) 
     return V 
 
-#Habría que añadir más payoffs. El vanilla es el más normal pero tampoco cuesta mucho. Es cambiar la fórmula payOff añadiendo un nuevo parámetro que sea predefinido como 'Vanilla'
-# Adaptarlo para up-and-out barriers requiere modificar un poco así que se puede hacer una función diferente. SI el precio sube por encima de la barrera hay que dejar claro que la opción no se ejecuta y el payoff será cero  
-# Definir otra función que sea up_out_eu_GBM y luego poner un if que si el payoff es ese se llame a esa función
-
-def eu_cir_GBM (r_0, sigma, S_0, K, R, sigma_r, num_steps, T, put_or_call, num_simulations = 10000, integration = 'E', ant_variates = False, cir_integration = 'E', cir_ant_variates = False):
-
-    # Esta función la tengo definida en el portátil 
-
-    (S,r) = cir_GBM(r_0, sigma, S_0, sigma_r, num_steps,T, cir_integration, cir_ant_variates) 
-    
-    # Lo que viene ahora se puede hacer mejor vectorizando np.mean o algo así seguro
-    
-    average_r = np.zeros(num_simulations)
-    for i in range(num_simulations):
-        average_r[i] = np.mean(r[i, :])
-
-    Vs = np.zeros (num_simulations)  
-    for i in range(i):
-        #esto creo que es correcto, cogemos la media de las r para cada valor y luego tomamos medias.
-        Vs[i] = math.exp(-r[i]*T) *payOff(S[i, num_steps], K, put_or_call) 
-    
-    V = np.mean(Vs) 
-    return V 
