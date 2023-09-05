@@ -18,6 +18,18 @@ def calc_d_1(K, S, r, T, sigma, div = 0):
     d_1 = (math.log(S/K) + (r-div+sigma**2/2)*(T))/(sigma*math.sqrt(T))
     return d_1
 def calc_d_2(K, S, r, T, sigma,  div = 0):
+    """
+    Calculate the value d2 in Black-Scholes model 
+
+    : param K           : Strike price of the option 
+    : param S           : Spot price of the underlying stock 
+    : param r           : Risk-free interest rate 
+    : param T           : Time for maturity  
+    : param sigma       : Volatility 
+    : param call_or_put : Type of option: Call ('C') or Put ('P')
+    : param div         : Dividends 
+    : returns           : d2
+    """
     d_2 = (math.log(S/K) + (r-div-sigma**2/2)*(T))/(sigma*math.sqrt(T))
     return d_2
 
