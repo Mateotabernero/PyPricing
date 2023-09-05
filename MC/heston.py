@@ -9,10 +9,10 @@ def heston(r, sigma_0, S_0, kappa, theta, xi, num_steps, T, corr_index = 0, num_
     W[1,:] = corr_index*W[0,:] + np.sqrt(1-corr_index**2)*W[1,:]
 
     S[:,0] = S_0
-    v[:,0] = sigma_0**2 
+    v[:,0] = v_0
 
     for j in range(num_steps): 
-        S[:,j+1] = r*S[:,j]*delta_t + np.sqrt(v[:,j])*S[:,j]*W[0,:,j]
-        v[:,j+1] = kappa*(theta - v[:,j])*delta_t + xi*np.sqrt(v[:,j])*W[1,:,j]
+        S[:,j+1] = S[:,j] + r*S[:,j]*delta_t + np.sqrt(np.maximum(v[:,j],0))*S[:,j]*W[0,:,j]
+        v[:,j+1] = v[:,j] + kappa*(theta - v[:,j])*delta_t + xi*np.sqrt(np.maximum(v[:,j],0))*W[1,:,j]
     
     return (S,v)
