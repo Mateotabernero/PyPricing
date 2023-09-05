@@ -30,4 +30,11 @@ The file contains the functions needed for Binomial Option Pricing. Including:
 -
 -
 
-### min.py 
+### main.py 
+The main.py file provides an OOP approach to Binomial option pricing. 
+European and American options are defined as objects. From these objects we can then obtain the relevant information (value and greeks), which are defined as class methods based on the functions on the BinOP file 
+
+### examples.ipynb 
+A jupyter notebook containing examples on using Binomial method to price several methods 
+
+
