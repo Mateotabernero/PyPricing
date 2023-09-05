@@ -1,4 +1,0 @@
-Possible examples for this folder: 
-
-- Create routines to create graphs of the values and the greeks with time 
-- American options 
