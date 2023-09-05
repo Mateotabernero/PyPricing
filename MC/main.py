@@ -29,7 +29,7 @@ class MCGBMOption:
 
         S =  self.generate_paths(num_steps, num_simulations = num_simulations, integration_method = integration_method, ant_variates = ant_variates)
         
-        return np.exp(-self.r*self.T)*(np.mean(self.payOff(S, self.K, *args))) 
+        return np.exp(-self.r*self.T)*(np.mean(self.payOff(S, self.K, call_or_put, *args))) 
 
     def delta(self, num_steps, num_simulations = 10**4, integration_method = 'E', ant_variates = False):
         new_S = self.S*1.01
@@ -37,7 +37,7 @@ class MCGBMOption:
         price = self.price(num_steps, num_simulations, integration_method, ant_variates) 
 
         new_S = GBM.GBM(self.r, self.sig, new_S, num_steps, self.T, num_simulations, integration_method, ant_variates)
-        new_price = np.exp(-self.r*self.T)*(np.mean(self.payOff(new_S, self.K, *args)))
+        new_price = np.exp(-self.r*self.T)*(np.mean(self.payOff(new_S, self.K, call_or_put, *args)))
          
         return (new_price - price)/(new_S - self.S) 
 
@@ -47,7 +47,7 @@ class MCGBMOption:
         price = self.price(num_steps, num_simulations, integration_method, ant_variates) 
 
         new_S = GBM.GBM(self.r, new_sig, self.S, num_steps, self.T, num_simulations, integration_method, ant_variates)
-        new_price = np.exp(-self.r*self.T)*(np.mean(self.payOff(new_S, self.K, *args)))
+        new_price = np.exp(-self.r*self.T)*(np.mean(self.payOff(new_S, self.K, call_or_put, *args)))
 
         return (new_price - price)/(new_S - self.S) 
     
@@ -74,7 +74,7 @@ class MCHestonOption:
 
         S, v = self.generate_paths(num_steps, num_simulations = num_simulations, corr_index= corr_index)
         
-        return np.exp(-self.r*self.T)*(np.mean(self.payOff(S, self.K, *args)))
+        return np.exp(-self.r*self.T)*(np.mean(self.payOff(S, self.K, call_or_put, *args)))
     
     def delta(self, num_steps, num_simulations = 10**4, corr_index = 0): 
         new_S = self.S*1.01
@@ -83,7 +83,7 @@ class MCHestonOption:
 
         new_S, new_v = heston.heston(self.r, self.v_0, new_S, self.theta, self.xi, num_steps, corr_index, num_simulations) 
         
-        new_price = np.exp(-self.r*self.T)*np.mean(self.payOff(new_S, self.K, *args)) 
+        new_price = np.exp(-self.r*self.T)*np.mean(self.payOff(new_S, self.K, call_or_put, *args)) 
 
         return (new_price - price)/(new_S - self.S) 
     
