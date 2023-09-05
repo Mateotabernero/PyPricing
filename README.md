@@ -16,4 +16,17 @@ The helpFunction.py contains functions that are useful for the other files. Thos
 
 - payOff         : Calculates the (vanilla) payoff of an American or European option at a given time
 - asianPayOff    : Computes the payoff of an Asian option
-- mu_sigma       : Computes mean and standard deviation of log returns of a given stock 
+
+
+## BinOp folder
+The BinOp folder contains code for Binomial model to price European and American Models
+
+### Mathematical background 
+
+### BinOP.py 
+The file contains the functions needed for Binomial Option Pricing. Including: 
+- 
+-
+-
+
+### min.py 
