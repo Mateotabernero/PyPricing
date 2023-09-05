@@ -19,13 +19,14 @@ The helpFunction.py contains functions that are useful for the other files. Thos
 
 
 ## BinOp folder
+
 The BinOp folder contains code for Binomial model to price European and American Models
 
 ### Mathematical background 
 
 ### BinOP.py 
 The file contains the functions needed for Binomial Option Pricing. Including: 
-- 
+
 -
 -
 
