@@ -2,13 +2,14 @@ import GBM
 import heston 
 
 class MCGBMOption: 
-    def __init__(self, spot_price, strike_price, maturity, option_type, call_or_put, risk_free_rate, volatility): 
+    def __init__(self, spot_price, strike_price, maturity, option_type, call_or_put, risk_free_rate, volatility, payOff = EuPayoff): 
         self.S   = spot_price 
         self.K   = strike_price 
         self.T   = maturity 
         self.r   = risk_free_rate
         self.sig = volatility 
-
+        
+        self.payOff     = payOff
         self.optionType = option_type
         self.CoP        = call_or_put
 
