@@ -8,6 +8,20 @@ AsPayOff = payOffs.AsPayOff
 
 class MCGBMOption: 
     def __init__(self, risk_free_rate, volatility, spot_price, strike_price, maturity, call_or_put, payOff = EuPayOff): 
+        """ 
+        Initialize the option 
+        
+        : param risk_free_rate : risk free rate 
+        : param volatility     : Volatility 
+        : param spot_price     : Spot price of the option 
+        : param strike_price   : Strike price of the option 
+        : param maturity       : Maturity of the option 
+        : param call_or_put    : The option being a call or a put. The possibilities vary depending on the type of options. They are the same as in the payOff functions 
+        : param payOff         : The payOff of the option. Some predefined payoff functions are EuPayOff (European options), AsPayOff (Asian options) (Default value: EuPayOf) 
+        
+        """
+
+        
         self.S   = spot_price 
         self.K   = strike_price 
         self.T   = maturity 
@@ -16,7 +30,6 @@ class MCGBMOption:
         
         self.payOff     = payOff
         self.CoP        = call_or_put
-    # Aquí definiría las payOffs según el tipo de opción con la que estemos tratando y la definiría como un atributo de clase
 
 
     def generate_paths(self, num_steps, num_simulations = 10**4, integration_method = 'E', ant_variates = False):
