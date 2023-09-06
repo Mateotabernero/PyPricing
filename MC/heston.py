@@ -1,4 +1,6 @@
 import numpy as np
+import PayOffs 
+
 
 def heston(r, sigma_0, S_0, kappa, theta, xi, num_steps, T, corr_index = 0, num_simulations = 10000): 
     """
