@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import math 
 import helpFunctions
-import payOffs
+
 
 
 def GBM(r, sigma, S_0, num_steps, T, num_simulations = 10000, integration_method = 'E', ant_variates = False):
@@ -75,8 +75,5 @@ def as_GBM(r, sigma, S_0, K, num_steps, T, put_or_call, num_simulations = 10000,
     V  = np.exp(-r*T)*np.mean(Vs) 
     return V 
 
-
-EuPayOff = payOffs.EuPayOff
-AsPayOff = payOffs.AsPayOff
 
 
