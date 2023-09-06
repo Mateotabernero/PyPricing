@@ -33,3 +33,55 @@ def heston(r, sigma_0, S_0, kappa, theta, xi, num_steps, T, corr_index = 0, num_
         v[:,j+1] = v[:,j] + kappa*(theta - v[:,j])*delta_t + xi*np.sqrt(np.maximum(v[:,j],0))*W[1,:,j]
     
     return (S,v)
+
+
+def eu_heston(r, sigma_0, S_0, K, kappa, theta, xi, num_steps, T, call_or_put, corr_index, num_simulations = 10000): 
+    """
+    Computes the value of an European option under GBM using Monte Carlo method 
+
+    : param r                   : Risk-free interest rate 
+    : param sigma_0             : The initial volatility 
+    : param S_0                 : Spot price
+    : param K                   : Strike price 
+    : param kappa               : Kappa parameter in Heston model 
+    : param theta               : Theta parameter in Heston model 
+    : param xi                  : Xi parameter in Heston model 
+    : param num_steps           : Number of steps on the generation of paths
+    : param T                   : Maturity 
+    : param call_or_put         : Whether the option is a call ('C') or a put ('P')
+    : param corr_index          : Correlation index between the two Wiener processes (default value: 0)  
+    : param num_simulations     : Number of paths generated for MC (default value: 10000) 
+    : returns                   : Value of the option 
+
+    """
+    
+    S, v = heston(r, sigma_0, S_0, kappa, theta, xi, num_steps, T, corr_index = corr_index, num_simulations = num_simulations)
+    Vs   = payOffs.EuPayOff(S, K, call_or_put)
+    V    = np.exp(-r*T)*np.mean(Vs) 
+    return V 
+
+def am_heston(r, sigma_0, S_0, K, kappa, theta, xi, num_steps, T, call_or_put, corr_index, num_simulations = 10000):
+    
+    """
+    Computes the value of an European option under GBM using Monte Carlo method 
+
+    : param r                   : Risk-free interest rate 
+    : param sigma_0             : The initial Volatility 
+    : param S_0                 : Spot price
+    : param K                   : Strike price 
+    : param kappa               : Kappa parameter in Heston model 
+    : param theta               : Theta parameter in Heston model 
+    : param xi                  : Xi parameter in Heston model 
+    : param num_steps           : Number of steps on the generation of paths
+    : param T                   : Maturity 
+    : param call_or_put         : Whether the option is a Price call ('PC'), a Price put ('PP'), a strike call ('SC') or a strike put ('SP') 
+    : param corr_index          : Correlation index between the two Wiener processes (default value: 0)  
+    : param num_simulations     : Number of paths generated for MC (default value: 10000) 
+    : returns                   : Value of the option 
+
+    """
+    
+    S, v = heston(r, sigma_0, S_0, kappa, theta, xi, num_steps, T, corr_index = corr_index, num_simulations = num_simulations)
+    Vs   = payOffs.AmPayOff(S, K, call_or_put)
+    V    = np.exp(-r*T)*np.mean(Vs) 
+    return V 
