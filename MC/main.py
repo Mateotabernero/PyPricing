@@ -1,6 +1,6 @@
 import GBM 
 import heston 
-
+import payOffs
 class MCGBMOption: 
     def __init__(self, spot_price, strike_price, maturity, call_or_put, risk_free_rate, volatility, payOff = GBM.EuPayOff, *args): 
         self.S   = spot_price 
@@ -87,3 +87,7 @@ class MCHestonOption:
 
         return (new_price - price)/(new_S - self.S) 
     
+
+
+EuPayOff = payOffs.EuPayOff 
+AmPayOff = payOffs.AmPayOff 
