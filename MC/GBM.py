@@ -4,7 +4,6 @@ import math
 import helpFunctions
 import payOffs
 
-# Space inefficient, but allows for an easier treatment of path-dependent payoffs 
 
 def GBM(r, sigma, S_0, num_steps, T, num_simulations = 10000, integration_method = 'E', ant_variates = False):
     delta_t = T/num_steps 
@@ -75,4 +74,9 @@ def as_GBM(r, sigma, S_0, K, num_steps, T, put_or_call, num_simulations = 10000,
     Vs = payOffs.AsPayOff(S, K, call_or_put) 
     V  = np.exp(-r*T)*np.mean(Vs) 
     return V 
+
+
+EuPayOff = payOffs.EuPayOff
+AsPayOff = payOffs.AsPayOff
+
 
