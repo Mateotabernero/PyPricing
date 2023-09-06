@@ -104,6 +104,23 @@ def eu_GBM(r, sigma, S_0, K, num_steps, T, call_or_put, num_simulations = 10000,
     return V 
 
 def as_GBM(r, sigma, S_0, K, num_steps, T, put_or_call, num_simulations = 10000, integration_method = 'E', ant_variates = False):
+
+    """
+    Computes the value of an Asian option under GBM using Monte Carlo method 
+
+    : param r                   : Risk-free interest rate 
+    : param sigma               : Volatility 
+    : param S_0                 : Spot price 
+    : param K                   : Strike price 
+    : param num_steps           : Number of steps on the generation of paths
+    : param T                   : Maturity 
+    : param call_or_put         : Whether the option is a Price call('PC'), a price put ('PP'), a strike call ('SK') or a strike put ('SK') 
+    : param num_simulations     : Number of paths generated for MC 
+    : param integration_method  : SDE integration method to be used in the generation of paths (Euler-Maruyama ('E'), Milstein ('M') or Runge-Kutta ('RK')) 
+    : param ant_variates        : Boolean indicating whether antithetic variates are to be used
+    : returns                   : Value of the option 
+    """
+    
     S  = GBM(r, sigma, S_0, num_steps, T, num_simulations = num_simulations, integration_method = 'E', ant_variates = False)
     Vs = payOffs.AsPayOff(S, K, call_or_put) 
     V  = np.exp(-r*T)*np.mean(Vs) 
