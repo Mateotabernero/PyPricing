@@ -6,6 +6,22 @@ import helpFunctions
 
 
 def GBM(r, sigma, S_0, num_steps, T, num_simulations = 10000, integration_method = 'E', ant_variates = False):
+
+    """
+    Calculate sample paths of GBM 
+
+    : param r                  : The drift 
+    : param sigma              : The volatility 
+    : param S_0                : The initial price 
+    : param num_steps          : Number of steps for the random path generation  
+    : param T                  : Time length of the generated path 
+    : param num_simulations    : The number of paths generated (default value: 10000) 
+    : param integration_method : The SDE integration method used. Choose from 'E' (Euler-Maruyama), 'M' (Milstein) or 'RK' (Runge-Kutta) (default value: 'E')
+    : param ant_variates       : Boolean indicating whether antithetic variates are to be used 
+    : returns                  : A numpy array containing the generated paths      
+    
+    """
+
     delta_t = T/num_steps 
 
     S = np.zeros((num_simulations, num_steps +1))
