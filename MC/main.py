@@ -2,7 +2,7 @@ import GBM
 import heston 
 import payOffs
 class MCGBMOption: 
-    def __init__(self, spot_price, strike_price, maturity, call_or_put, risk_free_rate, volatility, payOff = GBM.EuPayOff, *args): 
+    def __init__(self, spot_price, strike_price, maturity, call_or_put, risk_free_rate, volatility, payOff = EuPayOff, *args): 
         self.S   = spot_price 
         self.K   = strike_price 
         self.T   = maturity 
@@ -10,7 +10,6 @@ class MCGBMOption:
         self.sig = volatility 
         
         self.payOff     = payOff
-        self.optionType = option_type
         self.CoP        = call_or_put
 
     # Aquí definiría las payOffs según el tipo de opción con la que estemos tratando y la definiría como un atributo de clase
@@ -56,7 +55,7 @@ class MCGBMOption:
         pass 
         
 class MCHestonOption: 
-    def __init__(self, spot_price, strike_price, maturity, risk_free_rate, volatility_0, kappa, theta, xi): 
+    def __init__(self, spot_price, strike_price, maturity, risk_free_rate, volatility_0, kappa, theta, xi, payOff = EuPayOff): 
         self.S     = spot_price
         self.K     = strike_price 
         self.T     = maturity 
