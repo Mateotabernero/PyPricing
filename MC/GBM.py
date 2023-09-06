@@ -114,7 +114,7 @@ def as_GBM(r, sigma, S_0, K, num_steps, T, put_or_call, num_simulations = 10000,
     : param K                   : Strike price 
     : param num_steps           : Number of steps on the generation of paths
     : param T                   : Maturity 
-    : param call_or_put         : Whether the option is a Price call('PC'), a price put ('PP'), a strike call ('SK') or a strike put ('SK') 
+    : param call_or_put         : Whether the option is a Price call('PC'), a price put ('PP'), a strike call ('SC') or a strike put ('SP') 
     : param num_simulations     : Number of paths generated for MC 
     : param integration_method  : SDE integration method to be used in the generation of paths (Euler-Maruyama ('E'), Milstein ('M') or Runge-Kutta ('RK')) 
     : param ant_variates        : Boolean indicating whether antithetic variates are to be used
