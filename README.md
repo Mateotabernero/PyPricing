@@ -39,6 +39,8 @@ Where $\nu_t$, the instantaneous variance, is given by the following CIR process
 
 $$ d\nu_t  = \kappa (\theta - \nu_t) dt + \xi \sqrt{\nu_t} dW_t^{\nu}$$ 
 
+Here $dW_t^S$ and $dW_t^{\nu}$ are Wiener processes with correlation index $\rho$
+
 This system of SDEs is integrated using numerical methods (only Euler-Maruyama is available for this case yet) in the heston function. 
 Then, eu_heston and as_heston use the paths geenerated by the GBM function to price European and Asian options using MC
 
