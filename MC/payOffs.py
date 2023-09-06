@@ -6,7 +6,7 @@ def EuPayOff(S, K, call_or_put):
     else: 
         raise ValueError("Please choose an appropiate value for call_or_put (Call ('C') or Put ('P')") 
 
-def AsPayOff(S, K, call_or_put); 
+def AsPayOff(S, K, call_or_put):
     A = np.zeros(S.shape[0]) 
     for i in range(len(A)): 
         A[i] = np.mean(S[i,:]) - S[i,0]/2 - S[i,-1]/2
