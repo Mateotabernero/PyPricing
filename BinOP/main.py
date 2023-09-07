@@ -1,10 +1,9 @@
 import numpy as np 
-import math 
-import scipy.stats as stats 
-import BinOp
+
+import BinOP
 
 class BinOption: 
-    def __init__(self, spot_price, strike_price, maturity, option_type, call_or_put, risk_free_rate, volatility, M, gamma_par = 1): 
+    def __init__(self, risk_free_rate, volatility, spot_price, strike_price, maturity, call_or_put, option_type,  M, gamma_par = 1): 
         self.S         = spot_price
         self.K         = strike_price
         self.T         = maturity 
@@ -15,7 +14,7 @@ class BinOption:
         self.OT        = option_type
         self.M         = M 
 
-        self.values, self.prices = BinOp.generate_tree(self.r, self.sigma, self.S, self.K, self.T, self.CoP, self.OT, self.M, gamma_par = self.gamma_par)
+        self.values, self.prices = BinOP.generate_tree(self.r, self.sigma, self.S, self.K, self.T, self.CoP, self.OT, self.M, gamma_par = self.gamma_par)
 
     def value(self): 
         """
@@ -44,7 +43,7 @@ class BinOption:
         : return : Vega of the option
         """
         new_sigma = 1.01*self.sigma
-        new_values, new_prices = BinOP.generate_tree(self.r, new_sigma, self.S, self.T, self.K, self.CoP, self.OT, self.M, gamma_par = self.gamma_par)
+        new_values, new_prices = BinOP.generate_tree(self.r, new_sigma, self.S, self.K, self.T, self.CoP, self.OT, self.M, gamma_par = self.gamma_par)
 
         return (new_values[0][0] - self.values[0][0])/(new_sigma - self.sigma) 
      
@@ -54,7 +53,7 @@ class BinOption:
         : return : Rho of the option 
         """
         new_r = 1.01*self.r
-        new_values, new_prices = BinOp.generate_tree(new_r, self.sigma, self.S, self.T, self.K, self.CoP, self.OT, self.M, gamma_par = self.gamma_par) 
+        new_values, new_prices = BinOP.generate_tree(new_r, self.sigma, self.S, self.K, self.T, self.CoP, self.OT, self.M, gamma_par = self.gamma_par) 
 
-        return (new_values[0][0] - self.values[0][0])/(new_r - r) 
+        return (new_values[0][0] - self.values[0][0])/(new_r - self.r) 
      
