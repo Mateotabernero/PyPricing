@@ -66,9 +66,9 @@ def binOP (r, sigma, S, K, T, put_or_call, optionType, M, gamma_par = 1):
     Calculate the value of an American or European option using Binomial Method 
     : param r            : Risk-free interest rate 
     : param sigma        : Volatility 
-    : param S            : Price of the underlying stock 
+    : param S            : Price of the underlying stock
+    : param K            : Strike price
     : param T            : Expiration time 
-    : K                  : Strike price
     : param put_or_call  : Put ('P') or Call ('C') 
     : param optionType   : Is it an European ('E') or American ('A') option? 
     : param M            : Number of steps in the binomial tree 
