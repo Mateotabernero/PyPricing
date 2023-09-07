@@ -58,80 +58,14 @@ def calc_p(r, delta_t, u, d):
     return (math.exp (r*delta_t)-d) / (u-d) 
 
 
-# To improve convergence choose gamma = e^((2/M)*log(K/S_0)) is a good choice
-
-def binOP (r, sigma, S, K, T, put_or_call, optionType, M, gamma_par = 1): 
-
-    """
-    Calculate the value of an American or European option using Binomial Method 
-    : param r            : Risk-free interest rate 
-    : param sigma        : Volatility 
-    : param S            : Price of the underlying stock
-    : param K            : Strike price
-    : param T            : Expiration time 
-    : param put_or_call  : Put ('P') or Call ('C') 
-    : param optionType   : Is it an European ('E') or American ('A') option? 
-    : param M            : Number of steps in the binomial tree 
-    : param gamma_par    : Gamma parameter in binomial option pricing (default value: 1) 
-    : return            : Value of the option 
-    """
-    # Compute delta_t 
-    delta_t = T / M 
-    
-    beta = calc_beta(r, sigma, delta_t, gamma_par = gamma_par )
-    u = calc_u(beta, gamma_par = gamma_par ) 
-    d = calc_d (beta, gamma_par = gamma_par) 
-    p = calc_p (r, delta_t, u, d)
-
-    # Creation of the tree of stock prices and the tree of option value (We don't really need to create the price tree, we just need the last one. the second s array is that case) (For american ption is necessary)
-
-    S= [[0 for _ in range (i+1)] for i in range (M+1)] 
-    V = [[0 for _ in range (i+1)] for i in range (M+1)]
-    V_cont = [[0 for _ in range(i+1)] for i in range(M+1)]
-    
-    
-    # Boundary values
-
-    S[0][0] = S_0
-    for j in range (M+1): 
-        S[M][j] = S[0][0] * (u**j) * (d** (M-j)) 
-        
-    
-    for j in range (M+1):
-        
-        V[M][j]   = payOff(S[M][j], K, put_or_call)
-
-    if optionType == 'E':
-        for i in reversed(range (M)):
-            for j in range(i+1):
-                S[i][j] = S[0][0] * (u**j) * (d** (i-j))
-                
-                V[i][j] = math.exp(-r*delta_t)*(p*V[i+1][j+1] + (1-p)*V[i+1][j])
-
-    
-    elif optionType == 'A':
-        for i in reversed(range(M)):
-            for j in range(i+1):
-                S[i][j] = S[0][0] * (u**j) * (d** (i-j))
-                
-                V_cont[i][j] = math.exp(-r*delta_t) *(p*(V[i+1][j+1]) + (1-p)*V[i+1][j])
-                V[i][j]      = max(payOff (S[i][j],K,put_or_call), V_cont[i][j])       
-
-    else:
-        raise ValueError ("optionType has to be European ('E') or American ('A')")
-    
-    # Computing greeks:  
-    delta = (V[1][1]- V[1][0]) / (S[1][1] -S[1][0])
-    theta = (V[2][1] - V[0][0]) / (2*delta_t)
-    # (Include gamma and other greeks) 
-    return V[0][0]
+# To improve convergence gamma = e^((2/M)*log(K/S_0)) is a good choice
 
 def generate_tree(r, sigma, S_0, T, K, put_or_call, optionType, M, gamma_par = 1): 
     """
     Calculate the Binomial Tree for American or European option 
     : param r            : Risk-free interest rate 
     : param sigma        : Volatility 
-    : param S            : Price of the underlying stock 
+    : param S_0          : Spot price of the underlying stock 
     : param T            : Expiration time 
     : K                  : Strike price
     : param put_or_call  : Put ('P') or Call ('C') 
@@ -185,6 +119,6 @@ def generate_tree(r, sigma, S_0, T, K, put_or_call, optionType, M, gamma_par = 1
         raise ValueError ("optionType has to be European ('E') or American ('A')")
     return V 
 
-def valueBinOp(r, sigma, S, T, K, put_or_call, optionType, M, gamma_par = 1): 
-    V, S = generate_tree(r, sigma, S, T, K, put_or_call, optionType, M, gamma_par = gamma_par)
+def valueBinOp(r, sigma, S_0, K, T put_or_call, optionType, M, gamma_par = 1): 
+    V, S = generate_tree(r, sigma, S_0, T, K, put_or_call, optionType, M, gamma_par = gamma_par)
     return V[0][0]
