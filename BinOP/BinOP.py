@@ -60,7 +60,7 @@ def calc_p(r, delta_t, u, d):
 
 # To improve convergence choose gamma = e^((2/M)*log(K/S_0)) is a good choice
 
-def binOP (r, sigma, S, T, K, put_or_call, optionType, M, gamma_par = 1): 
+def binOP (r, sigma, S, K, T, put_or_call, optionType, M, gamma_par = 1): 
 
     """
     Calculate the value of an American or European option using Binomial Method 
