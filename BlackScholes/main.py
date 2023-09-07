@@ -7,13 +7,14 @@ from BlackScholes import *
 # En la documentación de las greeks podría decir cómo están definidas. En plan dV/dS y tal 
 
 class BlackScholesOption:
-    def  __init__ (self, spot_price, strike_price, maturity, call_or_put, risk_free_rate, volatility, div= 0):
+    def  __init__ (self, risk_free_rate, volatility, spot_price, strike_price, maturity, call_or_put, div= 0):
+        
+        self.r     = risk_free_rate
+        self.sigma = volatility 
         self.S     = spot_price
         self.K     = strike_price
         self.T     = maturity 
         self.CoP   = call_or_put
-        self.r     = risk_free_rate
-        self.sigma = volatility 
         self.div   = div
  
     def _d1(self): 
@@ -39,7 +40,7 @@ class BlackScholesOption:
         """
         d1 = self._d1() 
         d2 = self._d2() 
-        option_price = BSprice (self.K, self.S, self.r, self.T, self.sigma, self.CoP, div = self.div)
+        option_price = BSprice (self.r, self.sigma, self.S, self.K, self.T, self.CoP, div = self.div)
         
         return option_price 
     
@@ -60,7 +61,7 @@ class BlackScholesOption:
         Calculates the gamma of the option 
         : returns : Gamma 
         """
-        gamma_ = gamma(self.K, self.S, self.r, self.T, self.sigma, self.CoP, div = self.div)
+        gamma_ = gamma(self.r, self.sigma, self.S, self.K, self.T, self.CoP, div = self.div)
         return gamma_ 
     
     def vega(self): 
@@ -68,7 +69,7 @@ class BlackScholesOption:
         Calculates the vega of the option 
         : return : Vega 
         """
-        vega_ = vega(self.K, self.S, self.r, self.T, self.sigma, self.CoP, div = self.div)
+        vega_ = vega(self.r, self.sigma, self.S, self.K, self.T, self.CoP, div = self.div)
         return vega_
     
     def theta(self):
@@ -76,7 +77,7 @@ class BlackScholesOption:
         Calculates the theta of the option 
         : return : Theta 
         """
-        theta_ = theta(self.K, self.S, self.r, self.T, self.sigma, self.CoP, div = self.div) 
+        theta_ = theta(self.r, self.sigma, self.S, self.K, self.T, self.CoP, div = self.div) 
         return -theta_ 
 
     def rho(self):
@@ -84,5 +85,5 @@ class BlackScholesOption:
         Calculates the rho of the option 
         : return : rho 
         """
-        rho_    = rho(self.K, self.S, self.r, self.T, self.sigma, self.CoP, div = self.div) 
+        rho_    = rho(self.r, self.sigma, self.S, self.K, self.T, self.CoP, div = self.div) 
         return rho_
