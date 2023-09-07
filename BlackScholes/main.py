@@ -1,10 +1,7 @@
 import numpy as np 
-import math 
 import scipy.stats as stats
 from BlackScholes import * 
 
-# Habría que cambiar como importamos las cosas
-# En la documentación de las greeks podría decir cómo están definidas. En plan dV/dS y tal 
 
 class BlackScholesOption:
     def  __init__ (self, risk_free_rate, volatility, spot_price, strike_price, maturity, call_or_put, div= 0):
@@ -22,7 +19,7 @@ class BlackScholesOption:
         Calculate d1 in the Black-Scholes model
         : return : d1 
         """
-        d1 = calc_d_1(self.K, self.S, self.r, self.T, self.sigma, div = self.div)
+        d1 = calc_d_1(self.r, self.sigma, self.S, self.K, self.T, div = self.div)
         return d1 
        
     def _d2(self): 
@@ -30,7 +27,7 @@ class BlackScholesOption:
         Calculate d2 in the Black-Scholes model 
         : return : d2 
         """
-        d2 = calc_d_2(self.K, self.S, self.r, self.T, self.sigma, div = self.div)
+        d2 = calc_d_2(self.r, self.sigma, self.S, self.K, self.T, div = self.div)
         return d2 
 
     def value(self): 
