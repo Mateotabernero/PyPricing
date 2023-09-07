@@ -1,6 +1,6 @@
 import numpy as np
 
-### We first include some functions to compute some useful magnitudes on Binomial Option pricing (all to be explained in the Readme file) 
+
 def payOff (S,K, put_or_call):
     """
     Calculate the payoff of an American or European option at some moment
