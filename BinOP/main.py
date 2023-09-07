@@ -15,7 +15,7 @@ class BinOption:
         self.OT        = option_type
         self.M         = M 
 
-        self.values, self.prices = BinOp.generate_tree(self.r, self.sigma, self.S, self.T, self.K, self.CoP, self.OT, self.M, gamma_par = self.gamma_par)
+        self.values, self.prices = BinOp.generate_tree(self.r, self.sigma, self.S, self.K, self.T, self.CoP, self.OT, self.M, gamma_par = self.gamma_par)
 
     def value(self): 
         """
