@@ -70,6 +70,9 @@ A jupyter notebook containing examples on using Binomial method to price several
 
 The BlackScholes folder contains code for pricing European options under Black-Scholes model 
 
+### Mathematical background 
+For mathematical background one can look at "Tools for Computational Finance" by Rüdiger U. Seydel 
+
 ### BlackScholes.py 
 
 BlackScholes.py contains the main functions for the Black-Scholes model, ranging from computing the quantitites $d_1$ and $d_2$ (widely used in Black-Scholes) to pricing European options and the formula for the main Greeks
