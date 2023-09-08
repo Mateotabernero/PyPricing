@@ -51,10 +51,11 @@ One should take into account that the way we compute greeks in MC (by running si
 
 ## BinOP folder
 
-The BinOp folder contains code for Binomial model to price European and American Models
+The BinOp folder contains code for pricing European and American options using the Binomial method.
 
 ### Mathematical background 
 For mathematical background one can look at "Tools for Computational Finance" by Rüdiger U. Seydel 
+
 ### BinOP.py 
 The file contains the functions needed for Binomial Option Pricing
 
@@ -68,3 +69,13 @@ A jupyter notebook containing examples on using Binomial method to price several
 ## BlackScholes folder 
 
 The BlackScholes folder contains code for pricing European options under Black-Scholes model 
+
+### BlackScholes.py 
+
+BlackScholes.py contains the main functions for the Black-Scholes model, ranging from computing the quantitites $d_1$ and $d_2$ (widely used in Black-Scholes) to pricing European options and the formula for the main Greeks
+
+### main.py 
+The main.py file contains an OOP to Black-Scholes option pricing. Similar to the sections above, options are defined as objects and the relevant information (Value and Greeks) can be obtained via class methods
+
+### examples.ipynb 
+The examples file contains examples for the 
